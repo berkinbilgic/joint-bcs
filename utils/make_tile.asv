@@ -1,0 +1,27 @@
+function [ show_ ] = make_tile( imgs, row_num, col_num, im )
+
+% cat 2d images together as given in row_num, col_num
+
+if row_num * col_num ~= size(imgs,3)
+    disp('In make_tile: sizes do not match')
+end
+
+show_ = zeros([size(imgs,1)*row_num, size(imgs,2)*col_num]);
+
+
+for r = 1:row_num
+    s = imgs(:,:,col_num*(r-1)+1);
+    
+    for c = 2:col_num
+        s = cat(2, s, imgs(:,:,col_num*(r-1)+c));
+    end
+    
+    if r == 1
+        show_ = s;
+    else
+        show_ = cat(1, show_, s);
+    end
+end
+
+end
+
